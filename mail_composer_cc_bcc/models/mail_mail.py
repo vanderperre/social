@@ -28,7 +28,7 @@ class MailMail(models.Model):
 
     email_bcc = fields.Char("Bcc", help="Blind Cc message recipients")
 
-    def _send(  # noqa: max-complexity: 4
+    def _send(  # noqa: C901 # noqa: max-complexity: 4
         self, auto_commit=False, raise_exception=False, smtp_session=None
     ):
         env = self.env
@@ -79,7 +79,7 @@ class MailMail(models.Model):
             bounce_alias = ICP.get_param("mail.bounce.alias")
             catchall_domain = ICP.get_param("mail.catchall.domain")
             if bounce_alias and catchall_domain:
-                headers["Return-Path"] = "%s@%s" % (bounce_alias, catchall_domain)
+                headers["Return-Path"] = f"{bounce_alias}@{catchall_domain}"
             if mail.headers:
                 try:
                     headers.update(ast.literal_eval(mail.headers))
@@ -223,7 +223,7 @@ class MailMail(models.Model):
                 failure_type="unknown",
             )
             if raise_exception:
-                if isinstance(e, (AssertionError, UnicodeEncodeError)):
+                if isinstance(e, AssertionError | UnicodeEncodeError):
                     if isinstance(e, UnicodeEncodeError):
                         value = "Invalid text: %s" % e.object
                     else:
@@ -257,7 +257,7 @@ class MailMail(models.Model):
             attachments=attachments,
             message_id=mail.message_id,
             references=mail.references,
-            object_id=mail.res_id and ("%s-%s" % (mail.res_id, mail.model)),
+            object_id=mail.res_id and (f"{mail.res_id}-{mail.model}"),
             subtype="html",
             subtype_alternative="plain",
             headers=headers,
