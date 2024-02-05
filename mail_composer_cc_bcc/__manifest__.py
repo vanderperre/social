@@ -22,7 +22,8 @@
         "views/mail_mail_views.xml",
         "views/mail_message_views.xml",
         "views/mail_template_views.xml",
-        "wizards/account_invoice_send_views.xml",
+        # todo: this below
+        # "wizards/account_invoice_send_views.xml",
         "wizards/mail_compose_message_view.xml",
     ],
 }

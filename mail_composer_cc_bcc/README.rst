@@ -114,6 +114,8 @@ Authors
 Contributors
 ------------
 
+-  Pascal Vanderperre pascal.vanderperre@noviat.com
+
 -  `Trobz <https://www.trobz.com>`__:
 
       -  Hai N. Le <hailn@trobz.com>
